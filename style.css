@@ -1,116 +1,115 @@
 body {
-    margin: 0;
-    padding: 0;
-    background: #0f0f0f;
-    color: #ffffff;
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.stars {
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: url('https://raw.githubusercontent.com/Pixabay/patterns/main/space-bg-stars.png');
+  animation: starAnim 200s linear infinite;
+  z-index: -2;
+}
+
+@keyframes starAnim {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-50%, -50%); }
 }
 
 .container {
-    position: relative;
-    text-align: center;
-    background: #1a1a1a;
-    padding: 50px 40px;
-    border-radius: 16px;
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-    max-width: 480px;
-    width: 90%;
-    animation: fadeIn 1s ease-in-out;
-    z-index: 1;
-    overflow: hidden;
+  text-align: center;
+  background: #1a1a1a;
+  padding: 50px 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #00ffff;
+  max-width: 480px;
+  width: 90%;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
 }
 
-/* 🌀 Weicher Farb-Glow außen */
 .container::before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    z-index: -1;
-    border-radius: 30px;
-    background: linear-gradient(135deg, #00ffff, #0066ff, #00ff99);
-    background-size: 300% 300%;
-    animation: animateGlow 8s ease-in-out infinite;
-    filter: blur(35px);
-    opacity: 0.4;
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #00ffff, #0066ff, #00ff99);
+  background-size: 300% 300%;
+  animation: rotateBorder 15s ease infinite;
+  z-index: -1;
+  filter: blur(40px);
+  opacity: 0.4;
 }
 
-/* 🌈 Bewegung des Farbverlaufs */
-@keyframes animateGlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(-10px); }
-    100% { opacity: 1; transform: translateY(0); }
+@keyframes rotateBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .logo {
-    width: 160px;
-    margin-bottom: 24px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    filter: drop-shadow(0 0 12px #00ffff);
-    animation: fadeIn 1s ease-in-out;
+  width: 160px;
+  margin-bottom: 24px;
+  filter: drop-shadow(0 0 10px #00ffff);
 }
 
 input {
-    padding: 14px;
-    width: 90%;
-    max-width: 300px;
-    border-radius: 8px;
-    border: none;
-    background: #1f1f1f;
-    color: #00ffff;
-    font-size: 15px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0,255,255,0.2);
+  padding: 14px;
+  width: 90%;
+  max-width: 300px;
+  border-radius: 8px;
+  border: none;
+  background: #111;
+  color: #00ffff;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0,255,255,0.2);
 }
 
 button {
-    padding: 14px 24px;
-    margin-top: 16px;
-    background: #00ffff;
-    color: #000;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 20px #00ffff70;
+  padding: 14px 24px;
+  margin-top: 20px;
+  background: #00ffff;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  box-shadow: 0 0 20px #00ffff80;
 }
 
 button:hover {
-    background: #00e6e6;
-    box-shadow: 0 0 30px #00ffff;
+  background: #00e6e6;
 }
 
 #resultBox {
-    display: none;
-    margin-top: 24px;
-    background: #2a2a2a;
-    padding: 20px;
-    border-radius: 8px;
-    font-size: 14px;
-    color: #ccc;
-    text-align: left;
-    animation: fadeIn 0.5s ease-in-out;
-    max-height: 300px;
-    overflow-y: auto;
+  display: none;
+  margin-top: 24px;
+  background: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #ccc;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 footer {
-    margin-top: 30px;
-    font-size: 0.8em;
-    color: #888;
+  margin-top: 30px;
+  font-size: 0.8em;
+  color: #888;
 }
