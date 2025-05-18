@@ -118,3 +118,33 @@ footer {
   font-size: 0.8em;
   color: #888;
 }
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #0b0f1a, #05070d);
+    z-index: -3;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: url('https://raw.githubusercontent.com/hamham49174/chaintrust-site/main/star-bg-transparent.png'); /* Optional: Eigene PNG verwenden */
+    background-repeat: repeat;
+    background-size: contain;
+    animation: moveStars 180s linear infinite;
+    opacity: 0.15;
+    z-index: -2;
+}
+
+@keyframes moveStars {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-200px, -200px); }
+}
