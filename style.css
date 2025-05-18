@@ -10,31 +10,39 @@ body {
     height: 100vh;
 }
 
-@keyframes glowing-border {
-    0% {
-        box-shadow: 0 0 10px #00ffff;
-    }
-    50% {
-        box-shadow: 0 0 40px #00ffff, 0 0 60px #00ffff;
-    }
-    100% {
-        box-shadow: 0 0 10px #00ffff;
-    }
-}
-
 .container {
-    text-align: center;
-    background: #1a1a1a;
+    position: relative;
     padding: 50px 40px;
     border-radius: 16px;
     max-width: 480px;
     width: 90%;
-    animation: glowing-border 2s infinite ease-in-out;
+    background: #1a1a1a;
+    text-align: center;
+    z-index: 1;
 }
 
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(-10px); }
-    100% { opacity: 1; transform: translateY(0); }
+.container::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    border-radius: 20px;
+    background: conic-gradient(from 0deg, #00ffff, #ff00ff, #00ff88, #00ffff);
+    animation: spin 6s linear infinite, hueShift 10s linear infinite;
+    filter: blur(8px);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes hueShift {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
 }
 
 .logo {
@@ -44,7 +52,6 @@ body {
     margin-left: auto;
     margin-right: auto;
     filter: drop-shadow(0 0 10px #00ffff);
-    animation: fadeIn 1s ease-in-out;
 }
 
 h1 {
@@ -95,7 +102,6 @@ button:hover {
     font-size: 14px;
     color: #ccc;
     text-align: left;
-    animation: fadeIn 0.5s ease-in-out;
     max-height: 300px;
     overflow-y: auto;
 }
