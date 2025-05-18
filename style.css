@@ -199,3 +199,18 @@ footer {
   height: 24px;
   filter: drop-shadow(0 0 4px #00ffff90);
 }
+
+.x-icon-only {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 0 4px #00ffffcc);
+  transition: transform 0.3s ease;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+}
+
+.x-icon-only:hover {
+  transform: scale(1.2);
+}
