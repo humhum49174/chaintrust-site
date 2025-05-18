@@ -80,8 +80,9 @@ input {
 }
 
 button {
+  display: block;
+  margin: 16px auto 0 auto; /* Abstand oben, zentriert */
   padding: 14px 24px;
-  margin-top: 20px;
   background: #00ffff;
   color: #000;
   border: none;
@@ -90,10 +91,7 @@ button {
   font-weight: bold;
   font-size: 15px;
   box-shadow: 0 0 20px #00ffff80;
-}
-
-button:hover {
-  background: #00e6e6;
+  transition: background 0.3s ease;
 }
 
 #resultBox {
