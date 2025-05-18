@@ -18,10 +18,11 @@ body {
     border-radius: 16px;
     max-width: 480px;
     width: 90%;
+    animation: fadeIn 1s ease-in-out;
     z-index: 1;
 }
 
-/* === Animierter Schein außen === */
+/* animierter Schein außen mit Farbdrehung */
 .container::before {
     content: "";
     position: absolute;
@@ -31,21 +32,24 @@ body {
     bottom: -12px;
     z-index: -1;
     border-radius: 24px;
-    background: conic-gradient(from 0deg, #00ffff, #0099ff, #00ff99, #00ffff);
-    animation: spinGlow 8s linear infinite;
+    background: #00ffff;
     filter: blur(40px);
-    opacity: 0.8;
+    animation: hueSpin 8s linear infinite;
 }
 
-@keyframes spinGlow {
-    from {
-        transform: rotate(0deg);
-        filter: hue-rotate(0deg) blur(40px);
-    }
-    to {
-        transform: rotate(360deg);
-        filter: hue-rotate(360deg) blur(40px);
-    }
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Farbton ändert sich sanft über Zeit */
+@keyframes hueSpin {
+  0% {
+    filter: hue-rotate(0deg) blur(40px);
+  }
+  100% {
+    filter: hue-rotate(360deg) blur(40px);
+  }
 }
 
 .logo {
@@ -55,12 +59,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     filter: drop-shadow(0 0 10px #00ffff);
-}
-
-h1 {
-    font-size: 2em;
-    margin: 10px 0;
-    text-shadow: 0 0 10px #00ffff;
+    animation: fadeIn 1s ease-in-out;
 }
 
 input {
@@ -74,7 +73,6 @@ input {
     font-size: 15px;
     text-align: center;
     box-shadow: 0 0 10px rgba(0,255,255,0.2);
-    margin-top: 10px;
 }
 
 button {
@@ -105,6 +103,7 @@ button:hover {
     font-size: 14px;
     color: #ccc;
     text-align: left;
+    animation: fadeIn 0.5s ease-in-out;
     max-height: 300px;
     overflow-y: auto;
 }
