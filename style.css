@@ -1,4 +1,3 @@
-/* Hintergrund und Grundlayout */
 body {
     margin: 0;
     padding: 0;
@@ -12,36 +11,26 @@ body {
     overflow: hidden;
 }
 
-/* Container mit animierter Umrandung */
 .container {
     position: relative;
-    padding: 60px 40px;
+    padding: 60px 30px;
     border-radius: 16px;
     background: #121212;
     box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
-    max-width: 480px;
+    max-width: 460px;
     width: 90%;
     text-align: center;
-    z-index: 1;
     animation: pulseBorder 4s infinite ease-in-out;
 }
 
-/* Animierter Neon-Glow-Effekt außen */
 @keyframes pulseBorder {
-    0% {
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2), 0 0 40px rgba(0, 255, 255, 0.05);
-    }
-    50% {
-        box-shadow: 0 0 30px rgba(0, 255, 255, 0.4), 0 0 60px rgba(0, 255, 255, 0.2);
-    }
-    100% {
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2), 0 0 40px rgba(0, 255, 255, 0.05);
-    }
+    0% { box-shadow: 0 0 20px rgba(0,255,255,0.2), 0 0 40px rgba(0,255,255,0.05); }
+    50% { box-shadow: 0 0 30px rgba(0,255,255,0.4), 0 0 60px rgba(0,255,255,0.2); }
+    100% { box-shadow: 0 0 20px rgba(0,255,255,0.2), 0 0 40px rgba(0,255,255,0.05); }
 }
 
-/* Logo mit leuchtender Bewegung */
 .logo {
-    width: 150px;
+    width: 130px;
     filter: drop-shadow(0 0 8px #00f5ff);
     animation: flicker 2.5s infinite alternate;
 }
@@ -52,7 +41,6 @@ body {
     100% { opacity: 0.85; }
 }
 
-/* Titel & Beschreibung */
 h1 {
     font-size: 28px;
     margin-bottom: 5px;
@@ -65,10 +53,10 @@ p {
     margin-bottom: 20px;
 }
 
-/* Eingabefeld */
+/* Responsive input */
 input {
     padding: 12px;
-    width: 90%;
+    width: 100%;
     max-width: 320px;
     border: none;
     border-radius: 6px;
@@ -80,7 +68,7 @@ input {
     outline: none;
 }
 
-/* Scan-Button */
+/* Button ohne Rakete */
 button {
     margin-top: 20px;
     padding: 12px 24px;
@@ -90,9 +78,11 @@ button {
     border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 14px;
-    transition: all 0.3s ease;
+    font-size: 15px;
+    width: 100%;
+    max-width: 200px;
     box-shadow: 0 0 15px #00ffff;
+    transition: all 0.3s ease;
     animation: neonPulse 2s infinite;
 }
 
@@ -102,37 +92,52 @@ button:hover {
     box-shadow: 0 0 20px #00ffff, 0 0 30px #00e6e6;
 }
 
-/* Scan-Button Glow */
 @keyframes neonPulse {
     0% { box-shadow: 0 0 10px #00ffff; }
     50% { box-shadow: 0 0 25px #00ffff; }
     100% { box-shadow: 0 0 10px #00ffff; }
 }
 
-/* Ergebnisbox */
 #resultBox {
     margin-top: 24px;
-    padding: 20px;
+    padding: 18px;
     background: #1e1e1e;
     color: #ccc;
     border-radius: 8px;
     font-size: 13px;
     text-align: left;
-    overflow-x: auto;
     white-space: pre-wrap;
+    overflow-x: auto;
     box-shadow: inset 0 0 10px #0ff3;
     animation: fadeIn 0.8s ease-out;
 }
 
-/* Footer */
 footer {
     margin-top: 30px;
     font-size: 0.75em;
     color: #888;
 }
 
-/* Reuse fadeIn */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Handy-Optimierung */
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 40px 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 13px;
+    }
+
+    .logo {
+        width: 100px;
+    }
 }
