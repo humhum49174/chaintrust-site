@@ -3,7 +3,7 @@ body {
     padding: 0;
     background: #0f0f0f;
     color: #ffffff;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,10 +14,11 @@ body {
     text-align: center;
     background: #1a1a1a;
     padding: 50px 40px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
     max-width: 480px;
     width: 90%;
+    animation: fadeIn 1s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -27,7 +28,6 @@ body {
 
 .logo {
     width: 160px;
-    max-width: 100%;
     margin-bottom: 24px;
     display: block;
     margin-left: auto;
@@ -37,35 +37,37 @@ body {
 }
 
 input {
-    padding: 12px;
+    padding: 14px;
     width: 90%;
     max-width: 300px;
-    margin-top: 20px;
-    border-radius: 6px;
+    border-radius: 8px;
     border: none;
-    background: #f5f5f5;
-    color: #000;
-    font-size: 14px;
+    background: #1f1f1f;
+    color: #00ffff;
+    font-size: 15px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,255,255,0.2);
 }
 
 button {
-    padding: 12px 24px;
-    margin-top: 15px;
-    background: #00cccc;
+    padding: 14px 24px;
+    margin-top: 16px;
+    background: #00ffff;
     color: #000;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 14px;
-    transition: background 0.3s ease;
+    font-size: 15px;
+    transition: 0.3s;
+    box-shadow: 0 0 20px #00ffff70;
 }
 
 button:hover {
     background: #00e6e6;
+    box-shadow: 0 0 30px #00ffff;
 }
 
-/* 👇 resultBox ist standardmäßig unsichtbar */
 #resultBox {
     display: none;
     margin-top: 24px;
@@ -76,10 +78,12 @@ button:hover {
     color: #ccc;
     text-align: left;
     animation: fadeIn 0.5s ease-in-out;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 footer {
-    margin-top: 40px;
+    margin-top: 30px;
     font-size: 0.8em;
     color: #888;
 }
