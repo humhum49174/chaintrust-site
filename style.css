@@ -10,39 +10,43 @@ body {
     height: 100vh;
 }
 
-/* Animierter Farbverlauf-Glow außen */
-.container::before {
-    content: "";
-    position: absolute;
-    top: -25px;
-    left: -25px;
-    right: -25px;
-    bottom: -25px;
-    z-index: -1;
-    border-radius: 30px;
-    background: linear-gradient(135deg, #00ffff, #0066ff, #00ff99);
-    background-size: 300% 300%;
-    filter: blur(60px);
-    opacity: 0.5;
-    animation: animatedGlow 12s ease infinite;
-}
-
-@keyframes animatedGlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
 .container {
     position: relative;
     text-align: center;
     background: #1a1a1a;
     padding: 50px 40px;
     border-radius: 16px;
-    box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
     max-width: 480px;
     width: 90%;
     animation: fadeIn 1s ease-in-out;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* 🟢 Smooth Glow ohne „Pixelblitz“ */
+.container::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    z-index: -1;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #00ffff, #0066ff, #00ff99);
+    background-size: 400% 400%;
+    animation: animateGlow 14s ease-in-out infinite;
+    filter: blur(40px);
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+}
+
+/* 🌈 Farbverlauf bewegt sich weich */
+@keyframes animateGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 @keyframes fadeIn {
@@ -56,7 +60,7 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    filter: drop-shadow(0 0 15px #00ffff);
+    filter: drop-shadow(0 0 12px #00ffff);
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -70,7 +74,7 @@ input {
     color: #00ffff;
     font-size: 15px;
     text-align: center;
-    box-shadow: 0 0 12px rgba(0,255,255,0.3);
+    box-shadow: 0 0 10px rgba(0,255,255,0.2);
 }
 
 button {
@@ -83,13 +87,13 @@ button {
     cursor: pointer;
     font-weight: bold;
     font-size: 15px;
-    transition: 0.3s;
-    box-shadow: 0 0 25px #00ffff90;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px #00ffff70;
 }
 
 button:hover {
     background: #00e6e6;
-    box-shadow: 0 0 35px #00ffff;
+    box-shadow: 0 0 30px #00ffff;
 }
 
 #resultBox {
