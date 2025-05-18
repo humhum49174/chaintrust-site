@@ -10,7 +10,7 @@ body {
     height: 100vh;
 }
 
-/* Stärkerer animierter Außen-Glow */
+/* Animierter Farbverlauf-Glow außen */
 .container::before {
     content: "";
     position: absolute;
@@ -20,15 +20,17 @@ body {
     bottom: -25px;
     z-index: -1;
     border-radius: 30px;
-    background: #00ffff;
-    filter: hue-rotate(0deg) blur(60px);
-    opacity: 0.6;
-    animation: spinHue 10s linear infinite;
+    background: linear-gradient(135deg, #00ffff, #0066ff, #00ff99);
+    background-size: 300% 300%;
+    filter: blur(60px);
+    opacity: 0.5;
+    animation: animatedGlow 12s ease infinite;
 }
 
-@keyframes spinHue {
-    0% { filter: hue-rotate(0deg) blur(60px); }
-    100% { filter: hue-rotate(360deg) blur(60px); }
+@keyframes animatedGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .container {
