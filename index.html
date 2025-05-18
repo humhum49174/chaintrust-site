@@ -1,28 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ChainTrust - Token Analyzer</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>ChainTrust</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" alt="ChainTrust Logo" class="logo" />
-    
-    <h1>ChainTrust</h1>
-    <p class="subtitle">Analyze token contracts for risks, honeypots and more.</p>
+    <div class="container">
+        <img src="logo.png" alt="ChainTrust Logo" class="logo" />
+        <h1>ChainTrust</h1>
+        <p>Analyze token contracts for risks, honeypots and more.</p>
 
-    <input type="text" placeholder="Enter Contract Address" id="contractInput" />
-    <button onclick="analyze()">🔍 Scan Contract</button>
+        <input type="text" id="contractInput" placeholder="Enter Contract Address" />
+        <button onclick="scanToken()">🔍 Scan Contract</button>
 
-    <div id="resultBox"></div>
-
-    <footer>
-      <p>⚡ Powered by ChainTrust • © 2025</p>
-    </footer>
-  </div>
-
-  <script src="script.js"></script>
+        <pre id="resultBox"></pre>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
