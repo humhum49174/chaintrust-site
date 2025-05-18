@@ -11,45 +11,19 @@ body {
 }
 
 .container {
-    position: relative;
     text-align: center;
     background: #1a1a1a;
     padding: 50px 40px;
     border-radius: 16px;
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
     max-width: 480px;
     width: 90%;
     animation: fadeIn 1s ease-in-out;
-    z-index: 1;
-}
-
-/* animierter Schein außen mit Farbdrehung */
-.container::before {
-    content: "";
-    position: absolute;
-    top: -12px;
-    left: -12px;
-    right: -12px;
-    bottom: -12px;
-    z-index: -1;
-    border-radius: 24px;
-    background: #00ffff;
-    filter: blur(40px);
-    animation: hueSpin 8s linear infinite;
 }
 
 @keyframes fadeIn {
   0% { opacity: 0; transform: translateY(-10px); }
   100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Farbton ändert sich sanft über Zeit */
-@keyframes hueSpin {
-  0% {
-    filter: hue-rotate(0deg) blur(40px);
-  }
-  100% {
-    filter: hue-rotate(360deg) blur(40px);
-  }
 }
 
 .logo {
