@@ -2,20 +2,23 @@ function analyze() {
     const address = document.getElementById("contractInput").value.trim();
     const resultBox = document.getElementById("resultBox");
 
+    resultBox.className = "";
+    resultBox.style.display = "block";
+
     if (!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) {
-        resultBox.style.display = "block";
+        resultBox.classList.add("box-error");
         resultBox.innerHTML = "❌ Invalid contract address.";
         return;
     }
 
-    resultBox.style.display = "block";
+    resultBox.classList.add("box-loading");
     resultBox.innerHTML = "<span class='blinking'>🔍 Scanning...</span>";
 
     setTimeout(() => {
         const random = Math.random();
 
         if (random < 0.4) {
-            // ✅ SAFE Token
+            resultBox.classList.add("box-safe");
             resultBox.innerHTML = `
                 ✅ <strong>Scan Result: SAFE</strong><br/>
                 🔐 Honeypot: <b>No</b><br/>
@@ -25,7 +28,7 @@ function analyze() {
                 🧠 Contract Verified: Yes<br/>
             `;
         } else if (random < 0.75) {
-            // ⚠️ RISKY Token
+            resultBox.classList.add("box-risk");
             resultBox.innerHTML = `
                 ⚠️ <strong>Scan Result: RISKY</strong><br/>
                 🔐 Honeypot: <b>No</b><br/>
@@ -35,7 +38,7 @@ function analyze() {
                 🧠 Contract Verified: No<br/>
             `;
         } else {
-            // 🚨 HONEYPOT Token
+            resultBox.classList.add("box-danger");
             resultBox.innerHTML = `
                 🚨 <strong>Scan Result: HONEYPOT</strong><br/>
                 🔐 Honeypot: <b>Yes</b><br/>
@@ -45,5 +48,5 @@ function analyze() {
                 🧠 Contract Verified: No<br/>
             `;
         }
-    }, 2000);
+    }, 1500);
 }
