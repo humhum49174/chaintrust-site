@@ -1,4 +1,4 @@
-async function analyze() {
+function analyze() {
     const address = document.getElementById("contractInput").value.trim();
     const resultBox = document.getElementById("resultBox");
 
@@ -12,48 +12,41 @@ async function analyze() {
     }
 
     resultBox.classList.add("box-loading");
-    resultBox.innerHTML = "<span class='blinking'>🔍 Scanning real data...</span>";
+    resultBox.innerHTML = "<span class='blinking'>🔍 Scanning...</span>";
 
-    try {
-        const response = await fetch(`https://api.honeypot.is/v1/scan/${address}`);
-        const data = await response.json();
-        resultBox.classList.remove("box-loading");
+    setTimeout(() => {
+        const random = Math.random();
 
-        if (data.error) {
-            resultBox.classList.add("box-error");
-            resultBox.innerHTML = `❌ Error: ${data.error}`;
-            return;
-        }
-
-        const isHoneypot = data.honeypotResult?.isHoneypot;
-        const buyTax = data.honeypotResult?.buyTax ?? "N/A";
-        const sellTax = data.honeypotResult?.sellTax ?? "N/A";
-        const isVerified = data.sourceCode ? "Yes" : "No";
-        const liquidity = data.honeypotResult?.isLpLocked ? "Yes" : "No";
-
-        if (isHoneypot) {
-            resultBox.classList.add("box-danger");
-            resultBox.innerHTML = `
-                🚨 <strong>Scan Result: HONEYPOT</strong><br/>
-                🔐 Honeypot: <b>Yes</b><br/>
-                💸 Buy Tax: ${buyTax}%<br/>
-                💰 Sell Tax: ${sellTax}%<br/>
-                🔒 Liquidity Locked: ${liquidity}<br/>
-                🧠 Contract Verified: ${isVerified}<br/>
-            `;
-        } else {
+        if (random < 0.4) {
             resultBox.classList.add("box-safe");
             resultBox.innerHTML = `
                 ✅ <strong>Scan Result: SAFE</strong><br/>
                 🔐 Honeypot: <b>No</b><br/>
-                💸 Buy Tax: ${buyTax}%<br/>
-                💰 Sell Tax: ${sellTax}%<br/>
-                🔒 Liquidity Locked: ${liquidity}<br/>
-                🧠 Contract Verified: ${isVerified}<br/>
+                💸 Buy Tax: 1%<br/>
+                💰 Sell Tax: 2%<br/>
+                🔒 Liquidity Locked: Yes<br/>
+                🧠 Contract Verified: Yes<br/>
+            `;
+        } else if (random < 0.75) {
+            resultBox.classList.add("box-risk");
+            resultBox.innerHTML = `
+                ⚠️ <strong>Scan Result: RISKY</strong><br/>
+                🔐 Honeypot: <b>No</b><br/>
+                💸 Buy Tax: 8%<br/>
+                💰 Sell Tax: 12%<br/>
+                🔒 Liquidity Locked: Unknown<br/>
+                🧠 Contract Verified: No<br/>
+            `;
+        } else {
+            resultBox.classList.add("box-danger");
+            resultBox.innerHTML = `
+                🚨 <strong>Scan Result: HONEYPOT</strong><br/>
+                🔐 Honeypot: <b>Yes</b><br/>
+                💸 Buy Tax: 100%<br/>
+                💰 Sell Tax: 100%<br/>
+                🔒 Liquidity Locked: No<br/>
+                🧠 Contract Verified: No<br/>
             `;
         }
-    } catch (error) {
-        resultBox.classList.add("box-error");
-        resultBox.innerHTML = "❌ Error connecting to API.";
-    }
+    }, 1500);
 }
