@@ -24,7 +24,7 @@ body {
     overflow: hidden;
 }
 
-/* 🟢 Smooth Glow ohne „Pixelblitz“ */
+/* 🌀 Weicher Farb-Glow außen */
 .container::before {
     content: "";
     position: absolute;
@@ -35,14 +35,13 @@ body {
     z-index: -1;
     border-radius: 30px;
     background: linear-gradient(135deg, #00ffff, #0066ff, #00ff99);
-    background-size: 400% 400%;
-    animation: animateGlow 14s ease-in-out infinite;
-    filter: blur(40px);
-    opacity: 0.5;
-    transition: opacity 0.5s ease;
+    background-size: 300% 300%;
+    animation: animateGlow 8s ease-in-out infinite;
+    filter: blur(35px);
+    opacity: 0.4;
 }
 
-/* 🌈 Farbverlauf bewegt sich weich */
+/* 🌈 Bewegung des Farbverlaufs */
 @keyframes animateGlow {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
