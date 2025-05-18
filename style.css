@@ -169,3 +169,33 @@ footer {
   box-shadow: 0 0 15px #00ffff;
   transform: scale(1.05);
 }
+
+.x-top-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid #00ffff80;
+  border-radius: 50%;
+  z-index: 999;
+  box-shadow: 0 0 10px #00ffff40;
+  transition: 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.x-top-button:hover {
+  background: rgba(0, 255, 255, 0.15);
+  box-shadow: 0 0 15px #00ffff;
+  transform: scale(1.05);
+}
+
+.x-icon {
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 0 4px #00ffff90);
+}
