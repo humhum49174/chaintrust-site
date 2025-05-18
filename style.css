@@ -1,143 +1,98 @@
 body {
-    margin: 0;
-    padding: 0;
-    background: radial-gradient(circle, #0f0f0f 70%, #050505);
-    color: #ffffff;
-    font-family: 'Segoe UI', sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #0f0f0f 60%, #000);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
-    position: relative;
-    padding: 60px 30px;
-    border-radius: 16px;
-    background: #121212;
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
-    max-width: 460px;
-    width: 90%;
-    text-align: center;
-    animation: pulseBorder 4s infinite ease-in-out;
+  background: #121212;
+  padding: 40px 24px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 0 25px #00ffff99;
+  width: 90%;
+  max-width: 400px;
+  animation: glowBorder 4s infinite ease-in-out;
 }
 
-@keyframes pulseBorder {
-    0% { box-shadow: 0 0 20px rgba(0,255,255,0.2), 0 0 40px rgba(0,255,255,0.05); }
-    50% { box-shadow: 0 0 30px rgba(0,255,255,0.4), 0 0 60px rgba(0,255,255,0.2); }
-    100% { box-shadow: 0 0 20px rgba(0,255,255,0.2), 0 0 40px rgba(0,255,255,0.05); }
+@keyframes glowBorder {
+  0%   { box-shadow: 0 0 15px #00ffff33; }
+  50%  { box-shadow: 0 0 30px #00ffffaa; }
+  100% { box-shadow: 0 0 15px #00ffff33; }
 }
 
 .logo {
-    width: 130px;
-    filter: drop-shadow(0 0 8px #00f5ff);
-    animation: flicker 2.5s infinite alternate;
-}
-
-@keyframes flicker {
-    0% { opacity: 0.85; }
-    50% { opacity: 1; transform: scale(1.03); }
-    100% { opacity: 0.85; }
+  width: 100px;
+  margin: 0 auto 18px;
+  filter: drop-shadow(0 0 10px #00ffff);
 }
 
 h1 {
-    font-size: 28px;
-    margin-bottom: 5px;
-    text-shadow: 0 0 8px #00ffff;
+  font-size: 26px;
+  margin-bottom: 8px;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff66;
 }
 
 p {
-    font-size: 14px;
-    color: #cccccc;
-    margin-bottom: 20px;
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 20px;
 }
 
-/* Responsive input */
 input {
-    padding: 12px;
-    width: 100%;
-    max-width: 320px;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    background: #111;
-    color: #0ff;
-    box-shadow: inset 0 0 5px #0ff;
-    text-align: center;
-    outline: none;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  background: #1e1e1e;
+  color: #00ffff;
+  text-align: center;
+  box-shadow: inset 0 0 6px #00ffff55;
+  margin-bottom: 16px;
 }
 
-/* Button ohne Rakete */
 button {
-    margin-top: 20px;
-    padding: 12px 24px;
-    background: #00ffff;
-    color: #000;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 15px;
-    width: 100%;
-    max-width: 200px;
-    box-shadow: 0 0 15px #00ffff;
-    transition: all 0.3s ease;
-    animation: neonPulse 2s infinite;
+  padding: 12px 24px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  background: #00ffff;
+  color: #000;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 0 12px #00ffff99;
+  transition: transform 0.2s ease, background 0.3s ease;
 }
 
 button:hover {
-    background: #0ff;
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #00ffff, 0 0 30px #00e6e6;
-}
-
-@keyframes neonPulse {
-    0% { box-shadow: 0 0 10px #00ffff; }
-    50% { box-shadow: 0 0 25px #00ffff; }
-    100% { box-shadow: 0 0 10px #00ffff; }
+  transform: scale(1.05);
+  background: #00e6e6;
 }
 
 #resultBox {
-    margin-top: 24px;
-    padding: 18px;
-    background: #1e1e1e;
-    color: #ccc;
-    border-radius: 8px;
-    font-size: 13px;
-    text-align: left;
-    white-space: pre-wrap;
-    overflow-x: auto;
-    box-shadow: inset 0 0 10px #0ff3;
-    animation: fadeIn 0.8s ease-out;
+  background: #1a1a1a;
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: 6px;
+  color: #ccc;
+  text-align: left;
+  font-size: 13px;
+  box-shadow: inset 0 0 8px #00ffff33;
+  word-break: break-word;
+  white-space: pre-wrap;
+  display: none;
 }
 
 footer {
-    margin-top: 30px;
-    font-size: 0.75em;
-    color: #888;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Handy-Optimierung */
-@media screen and (max-width: 480px) {
-    .container {
-        padding: 40px 20px;
-    }
-
-    h1 {
-        font-size: 24px;
-    }
-
-    p {
-        font-size: 13px;
-    }
-
-    .logo {
-        width: 100px;
-    }
+  margin-top: 30px;
+  font-size: 0.75em;
+  color: #888;
 }
