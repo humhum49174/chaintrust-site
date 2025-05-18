@@ -1,0 +1,90 @@
+
+/* Global Reset */
+body {
+    margin: 0;
+    padding: 0;
+    background: #0f0f0f;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container Styling */
+.container {
+    text-align: center;
+    background: #1a1a1a;
+    padding: 50px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    max-width: 480px;
+    width: 90%;
+}
+
+/* Logo with animation and glow */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+    width: 160px;
+    max-width: 100%;
+    margin-bottom: 24px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    filter: drop-shadow(0 0 10px #00ffff);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Input field */
+input {
+    padding: 12px;
+    width: 90%;
+    max-width: 300px;
+    margin-top: 20px;
+    border-radius: 6px;
+    border: none;
+    background: #f5f5f5;
+    color: #000;
+    font-size: 14px;
+}
+
+/* Button styling */
+button {
+    padding: 12px 24px;
+    margin-top: 15px;
+    background: #00cccc;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #00e6e6;
+}
+
+/* Result box */
+#resultBox {
+    margin-top: 24px;
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #ccc;
+    text-align: left;
+}
+
+/* Footer styling */
+footer {
+    margin-top: 40px;
+    font-size: 0.8em;
+    color: #888;
+}
