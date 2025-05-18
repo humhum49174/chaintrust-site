@@ -12,13 +12,38 @@ function analyze() {
     resultBox.innerHTML = "<span class='blinking'>🔍 Scanning...</span>";
 
     setTimeout(() => {
-        resultBox.innerHTML = `
-            ✅ <strong>Scan Complete</strong><br/>
-            🔐 Honeypot: <b>No</b><br/>
-            💸 Buy Tax: 4%<br/>
-            💰 Sell Tax: 5%<br/>
-            🔒 Liquidity Locked: Yes<br/>
-            🧠 Contract Verified: Yes<br/>
-        `;
+        const random = Math.random();
+
+        if (random < 0.4) {
+            // ✅ SAFE Token
+            resultBox.innerHTML = `
+                ✅ <strong>Scan Result: SAFE</strong><br/>
+                🔐 Honeypot: <b>No</b><br/>
+                💸 Buy Tax: 1%<br/>
+                💰 Sell Tax: 2%<br/>
+                🔒 Liquidity Locked: Yes<br/>
+                🧠 Contract Verified: Yes<br/>
+            `;
+        } else if (random < 0.75) {
+            // ⚠️ RISKY Token
+            resultBox.innerHTML = `
+                ⚠️ <strong>Scan Result: RISKY</strong><br/>
+                🔐 Honeypot: <b>No</b><br/>
+                💸 Buy Tax: 8%<br/>
+                💰 Sell Tax: 12%<br/>
+                🔒 Liquidity Locked: Unknown<br/>
+                🧠 Contract Verified: No<br/>
+            `;
+        } else {
+            // 🚨 HONEYPOT Token
+            resultBox.innerHTML = `
+                🚨 <strong>Scan Result: HONEYPOT</strong><br/>
+                🔐 Honeypot: <b>Yes</b><br/>
+                💸 Buy Tax: 100%<br/>
+                💰 Sell Tax: 100%<br/>
+                🔒 Liquidity Locked: No<br/>
+                🧠 Contract Verified: No<br/>
+            `;
+        }
     }, 2000);
 }
