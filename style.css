@@ -1,13 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
   background: #000;
   color: #ffffff;
   font-family: 'Arial', sans-serif;
-  overflow: hidden;
-  height: 100vh;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
+/* Hintergrundverläufe */
 body::before {
   content: "";
   position: fixed;
@@ -26,7 +35,7 @@ body::after {
   left: 0;
   width: 200%;
   height: 200%;
-  background: url('stars.png'); /* Stelle sicher, dass diese Datei existiert */
+  background: url('stars.png');
   background-repeat: repeat;
   background-size: contain;
   animation: moveStars 180s linear infinite;
@@ -42,16 +51,14 @@ body::after {
 .container {
   text-align: center;
   background: #1a1a1a;
-  padding: 50px 40px;
+  padding: 40px 20px;
   border-radius: 20px;
   box-shadow: 0 0 20px #00ffff;
-  max-width: 480px;
   width: 90%;
-  margin: auto;
+  max-width: 480px;
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
   z-index: 1;
+  margin: 40px 0;
 }
 
 .container::before {
@@ -77,18 +84,21 @@ body::after {
 }
 
 .logo {
-  width: 160px;
-  margin-bottom: 24px;
+  width: 130px;
+  margin-bottom: 20px;
   filter: drop-shadow(0 0 10px #00ffff);
+}
+
+h1 {
+  font-size: 1.8rem;
 }
 
 input {
   padding: 14px;
-  width: 90%;
-  max-width: 300px;
+  width: 100%;
   border-radius: 8px;
   border: none;
-  background: linear-gradient(145deg, #0b1f33, #1a2f44); /* dunkelblau mit Verlauf */
+  background: linear-gradient(145deg, #0b1f33, #1a2f44);
   color: #aefbff;
   font-size: 15px;
   text-align: center;
@@ -127,6 +137,8 @@ button:hover {
   color: #ccc;
   max-height: 300px;
   overflow-y: auto;
+  text-align: left;
+  word-wrap: break-word;
 }
 
 footer {
