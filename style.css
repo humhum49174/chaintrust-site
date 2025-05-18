@@ -1,89 +1,138 @@
+/* Hintergrund und Grundlayout */
 body {
     margin: 0;
     padding: 0;
-    background: #0f0f0f;
+    background: radial-gradient(circle, #0f0f0f 70%, #050505);
     color: #ffffff;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    overflow: hidden;
 }
 
+/* Container mit animierter Umrandung */
 .container {
-    text-align: center;
-    background: #1a1a1a;
-    padding: 50px 40px;
+    position: relative;
+    padding: 60px 40px;
     border-radius: 16px;
-    box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+    background: #121212;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
     max-width: 480px;
     width: 90%;
-    animation: fadeIn 1s ease-in-out;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(-10px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.logo {
-    width: 160px;
-    margin-bottom: 24px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    filter: drop-shadow(0 0 10px #00ffff);
-    animation: fadeIn 1s ease-in-out;
-}
-
-input {
-    padding: 14px;
-    width: 90%;
-    max-width: 300px;
-    border-radius: 8px;
-    border: none;
-    background: #1f1f1f;
-    color: #00ffff;
-    font-size: 15px;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0,255,255,0.2);
+    z-index: 1;
+    animation: pulseBorder 4s infinite ease-in-out;
 }
 
+/* Animierter Neon-Glow-Effekt außen */
+@keyframes pulseBorder {
+    0% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2), 0 0 40px rgba(0, 255, 255, 0.05);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.4), 0 0 60px rgba(0, 255, 255, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2), 0 0 40px rgba(0, 255, 255, 0.05);
+    }
+}
+
+/* Logo mit leuchtender Bewegung */
+.logo {
+    width: 150px;
+    filter: drop-shadow(0 0 8px #00f5ff);
+    animation: flicker 2.5s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.85; }
+    50% { opacity: 1; transform: scale(1.03); }
+    100% { opacity: 0.85; }
+}
+
+/* Titel & Beschreibung */
+h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+    text-shadow: 0 0 8px #00ffff;
+}
+
+p {
+    font-size: 14px;
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+/* Eingabefeld */
+input {
+    padding: 12px;
+    width: 90%;
+    max-width: 320px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #111;
+    color: #0ff;
+    box-shadow: inset 0 0 5px #0ff;
+    text-align: center;
+    outline: none;
+}
+
+/* Scan-Button */
 button {
-    padding: 14px 24px;
-    margin-top: 16px;
+    margin-top: 20px;
+    padding: 12px 24px;
     background: #00ffff;
     color: #000;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 15px;
-    transition: 0.3s;
-    box-shadow: 0 0 20px #00ffff70;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px #00ffff;
+    animation: neonPulse 2s infinite;
 }
 
 button:hover {
-    background: #00e6e6;
-    box-shadow: 0 0 30px #00ffff;
+    background: #0ff;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #00ffff, 0 0 30px #00e6e6;
 }
 
+/* Scan-Button Glow */
+@keyframes neonPulse {
+    0% { box-shadow: 0 0 10px #00ffff; }
+    50% { box-shadow: 0 0 25px #00ffff; }
+    100% { box-shadow: 0 0 10px #00ffff; }
+}
+
+/* Ergebnisbox */
 #resultBox {
-    display: none;
     margin-top: 24px;
-    background: #2a2a2a;
     padding: 20px;
-    border-radius: 8px;
-    font-size: 14px;
+    background: #1e1e1e;
     color: #ccc;
+    border-radius: 8px;
+    font-size: 13px;
     text-align: left;
-    animation: fadeIn 0.5s ease-in-out;
-    max-height: 300px;
-    overflow-y: auto;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    box-shadow: inset 0 0 10px #0ff3;
+    animation: fadeIn 0.8s ease-out;
 }
 
+/* Footer */
 footer {
     margin-top: 30px;
-    font-size: 0.8em;
+    font-size: 0.75em;
     color: #888;
+}
+
+/* Reuse fadeIn */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
