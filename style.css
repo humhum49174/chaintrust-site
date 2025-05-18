@@ -21,37 +21,39 @@ body {
     z-index: 1;
 }
 
-/* Außenrahmen mit sanfter Drehung und Farbverlauf */
+/* === Animierter Schein außen === */
 .container::before {
     content: "";
     position: absolute;
-    top: -6px;
-    left: -6px;
-    right: -6px;
-    bottom: -6px;
-    border-radius: 20px;
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
     z-index: -1;
+    border-radius: 24px;
     background: conic-gradient(from 0deg, #00ffff, #0099ff, #00ff99, #00ffff);
-    animation: rotateFrame 10s linear infinite, shiftHue 20s ease-in-out infinite;
-    filter: blur(16px);
+    animation: spinGlow 8s linear infinite;
+    filter: blur(40px);
+    opacity: 0.8;
 }
 
-@keyframes rotateFrame {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes shiftHue {
-    0% { filter: hue-rotate(0deg); }
-    50% { filter: hue-rotate(60deg); }
-    100% { filter: hue-rotate(0deg); }
+@keyframes spinGlow {
+    from {
+        transform: rotate(0deg);
+        filter: hue-rotate(0deg) blur(40px);
+    }
+    to {
+        transform: rotate(360deg);
+        filter: hue-rotate(360deg) blur(40px);
+    }
 }
 
 .logo {
     width: 160px;
     margin-bottom: 24px;
     display: block;
-    margin: 0 auto 24px;
+    margin-left: auto;
+    margin-right: auto;
     filter: drop-shadow(0 0 10px #00ffff);
 }
 
