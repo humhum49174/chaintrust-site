@@ -19,11 +19,15 @@
 
   <div class="container">
     <img src="logo.png" alt="ChainTrust Logo" class="logo" />
+    <p class="tagline">🔍 AI-Enhanced Risk Detection. No Mercy for Rugs.</p>
     <h1>ChainTrust</h1>
     <p>Smart Contract Risk Scanner</p>
 
     <input type="text" id="contractInput" placeholder="Paste Token Contract Address" />
-    <button class="neon-button" onclick="scanToken()">Scan Token</button>
+
+    <div class="button-wrap">
+      <a class="snake-button" onclick="scanToken()">Scan Token</a>
+    </div>
 
     <pre id="resultBox"></pre>
     <footer>🔒 Powered by ChainTrust Security Engine | ChainTrust 2025</footer>
