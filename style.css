@@ -92,52 +92,32 @@ input {
   transition: 0.3s ease;
 }
 
+/* 🟦 Neuer Cleaner Scan-Button */
 .button-wrap {
   position: relative;
   margin-top: 24px;
 }
 
-.snake-button {
-  position: relative;
+.clean-button {
   display: inline-block;
   padding: 14px 30px;
   color: #00ffff;
   border: 2px solid #00ffff;
   border-radius: 10px;
   background: transparent;
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 600;
+  font-size: 15px;
   cursor: pointer;
   text-transform: uppercase;
-  overflow: hidden;
-  transition: 0.3s ease;
   font-family: 'Inter', sans-serif;
-  z-index: 1;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px transparent;
 }
 
-.snake-button::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, #00ffff, #00ff99, #0066ff);
-  animation: snake-border 2s linear infinite;
-  z-index: -1;
-  border-radius: 10px;
-}
-
-@keyframes snake-border {
-  0% { left: -100%; }
-  50% { left: 100%; }
-  100% { left: -100%; }
-}
-
-.snake-button:hover {
+.clean-button:hover {
+  background-color: #00ffff;
   color: #000;
-  background: #00ffff;
-  box-shadow: 0 0 25px #00ffff;
+  box-shadow: 0 0 12px #00ffffaa;
 }
 
 #resultBox {
