@@ -3,34 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ChainTrust</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <title>ChainTrust Scanner</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <div class="stars"></div>
-
   <div class="container">
-    <img src="logo.png" alt="ChainTrust Logo" class="logo" />
+    <h1>🔍 ChainTrust Token Scanner</h1>
+    <p>Check smart contract safety across all chains</p>
 
-    <div class="social-links">
-      <a href="https://x.com/TrustChainAI" target="_blank" class="social-btn"><img src="twitter.svg" alt="Twitter" /></a>
-      <a href="https://t.me/TrustChainAI" target="_blank" class="social-btn"><img src="telegram.svg" alt="Telegram" /></a>
-      <a href="https://discord.gg/TrustChainAI" target="_blank" class="social-btn"><img src="discord.svg" alt="Discord" /></a>
-    </div>
-
-    <h1>ChainTrust</h1>
-    <p>Smart Contract Risk Scanner</p>
-
-    <input type="text" id="contractInput" placeholder="Paste Token Contract Address" />
-    <div class="button-wrap">
-      <a class="clean-button" onclick="scanToken()">Scan Token</a>
-    </div>
+    <input type="text" id="contractInput" placeholder="Enter token contract address..." />
+    <button onclick="scanToken()">Scan Token</button>
 
     <div id="resultBox"></div>
-
-    <footer>Powered by ChainTrust Security Engine | ChainTrust 2025</footer>
   </div>
 
   <script src="script.js"></script>
