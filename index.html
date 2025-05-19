@@ -4,14 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ChainTrust</title>
-
-  <!-- Google Font: Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- 🧷 X-Button oben links -->
+  <!-- X-Button oben links -->
   <script type="module" src="https://x.com/TrustChainAI@1.9.96/build/spline-viewer.js"></script>
   <spline-viewer url="https://x.com/TrustChainAI"></spline-viewer>
 
@@ -20,16 +18,16 @@
   <div class="container">
     <img src="logo.png" alt="ChainTrust Logo" class="logo" />
 
-    <!-- 👇 Social Buttons -->
+    <!-- Social Buttons -->
     <div class="social-links">
       <a href="https://x.com/TrustChainAI" target="_blank" class="social-btn" aria-label="Twitter">
-        <img src="icons/twitter.svg" alt="Twitter">
+        <img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDBmZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMi4yYy02LjcgMC0xMiA1LjMtMTIgMTAuNCAwIDMuMSAyIDUuNyA1LjMgNi43LjQuMS41LS4xLjUtLjN2LTIuMWMtMi4xLjQtMi41LS45LTIuNS0uOS0uNC0xIC0uOS0xLjItLjktMS4yIDAtLjkgLjgtMS44IDEuOC0xLjggLjkgMCAxLjMuNyAxLjMgLjcuOCAxLjMgMi4xLjkgMi42LjcgLjEtLjYgLjMtLjkgLjUtMS0yLjItLjItNC40LTEuMS00LjQtNC44IDAtMSAuNC0xLjggMS0yLjQuMy0uMSAxLjEtLjMgMi4zLjkgLjYtLjEgMS4yLS4yIDEuOC0uMi42IDAgMS4yLjEgMS44LjMuNyAwIDEuMy4yIDEuOS40LS4yLjctLjcgMS4yLTEuNCAxLjUgLjYuMSAxLjEtLjMgMS42LS40LS4zLjYtLjggMS4xLTEuMyAxLjUtLjUuNC0xIC0uOC0xLjYtMS4xIDAuMSAxLjQtLjIgMi42LS4yIDIuN3YuNWMwIC4yLjIuNS41LjQgMy0xIDUuMi0zLjYgNS4yLTYuNyAwLTUuMS01LjMtMTAuNC0xMi0xMC40eiIvPjwvc3ZnPg==" alt="Twitter">
       </a>
       <a href="https://t.me/TrustChainAI" target="_blank" class="social-btn" aria-label="Telegram">
-        <img src="icons/telegram.svg" alt="Telegram">
+        <img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDBmZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMiAxMi4zYy0uMi0uMy4xLS42LjUtLjcuMy0uMiAxMC40LTQuMyAxMS0uNC4xLjIuMiAxLjkuMiAxLjlsLTEgNS41Yy0uMS41LS4zLjYtLjcuMy0uMi0uMS0zLjEtMi0zLjYtMi4yLS4zLS4yLS41IDAtLjUgLjMtLjEgLjItMS4yIDEuMy0xLjggMi0uMS4xLS4yLjMtLjIgLjUgMCAuMi4zLjQuNS41LjUuMyAxLjcgMS4xIDIuMyAxLjUgLjQuMi41LjQgMSAuMi41LS4yIDEuMi0uOSAxLjUtMS4zLjEtLjIuMi0uMi4zLS4xLjEuMS4xLjIuMS4yIDAgMCAxLjQtNS4zIDEuNi01LjguMi0uNi0uMS0uOS0uNy0uNy0xMiA0LjctMTAuMyA0LjItMTAuNSAxMC42eiIvPjwvc3ZnPg==" alt="Telegram">
       </a>
       <a href="https://discord.gg/TrustChainAI" target="_blank" class="social-btn" aria-label="Discord">
-        <img src="icons/discord.svg" alt="Discord">
+        <img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDBmZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMmMtNS43IDAtMTAuMyA0LjYtMTAuMyAxMC4zIDAgMS43LjUgMy4zIDEuNCA0LjZsLS41IDIuMyA0LjItMi4zYzEuMi4zIDIuMy40IDMuNS40czIuMy0uMSAzLjUtLjRsNC4yIDIuMy0uNS0yLjNjLjktMS4zIDEuNC0yLjkgMS40LTQuNiAwLTUuNy00LjYtMTAuMy0xMC4zLTEwLjN6bS00LjMgMTMuNWMtMS4xIDAtMi0xLjAtMi0yLjJzLjktMi4yIDItMi4yYzEuMiAwIDIuMSAxIDEuMiAyLjIgMCAxLjItLjkgMi4yLTIgMi4yeiBtOC44IDBjLTEuMSAwLTItMS0yLTIuMnMuOS0yLjIgMi0yLjJjMS4yIDAgMi4xIDEgMS4yIDIuMiAwIDEuMi0uOSAyLjItMiAyLjJ6Ii8+PC9zdmc+" alt="Discord">
       </a>
     </div>
 
