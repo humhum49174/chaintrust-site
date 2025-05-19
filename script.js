@@ -5,8 +5,6 @@ const chains = [
   { id: 42161, name: "Arbitrum" }
 ];
 
-const SOLSNIFFER_API_KEY = "ttgqm520se5mmzg2d8e2ydljv2yu3l";
-
 async function scanToken() {
   const token = document.getElementById("contractInput").value.trim();
   const box = document.getElementById("resultBox");
@@ -19,31 +17,35 @@ async function scanToken() {
     return;
   }
 
+  // Solana detection
   const isSolana = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(token);
 
   if (isSolana) {
     try {
-      const res = await fetch(`https://api.solsniffer.com/v1/token/${token}`, {
-        headers: { "x-api-key": SOLSNIFFER_API_KEY }
-      });
+      const res = await fetch(`https://api.rugcheck.xyz/v1/tokens/${token}/report`);
       if (!res.ok) throw new Error("Token not found on Solana");
       const data = await res.json();
 
+      const honeypot = data.honeypotResult?.isHoneypot ? "Yes 🚨" : "No ✅";
+      const rugscore = data.rugScore ?? "N/A";
+      const renounced = data.owner?.isRenounced ? "Yes ✅" : "No ❌";
+      const liquidity = data.liquidity?.sol ?? "N/A";
+
       box.innerHTML = `
         <strong>🌐 Solana Token</strong><br/>
-        🧬 Name: ${data.token_name}<br/>
-        💧 Liquidity: $${data.liquidity_usd}<br/>
-        🧠 Sniff Score: ${data.snifscore}<br/>
-        🧍 Top Holder: ${data.top_holder_percent}%<br/>
-        🧨 Honeypot: ${data.honeypot ? "Yes 🚨" : "No ✅"}
+        📉 RugScore: ${rugscore} / 100<br/>
+        🧨 Honeypot: ${honeypot}<br/>
+        🔐 Renounced: ${renounced}<br/>
+        💧 Liquidity: ${liquidity} SOL
       `;
       return;
     } catch (e) {
-      box.textContent = "❌ Error: " + e.message;
+      box.textContent = "❌ Solana-Scan fehlgeschlagen: " + e.message;
       return;
     }
   }
 
+  // EVM chains via GoPlus
   let found = false;
   for (const chain of chains) {
     try {
@@ -55,21 +57,21 @@ async function scanToken() {
       found = true;
       box.innerHTML = `
         <strong>🌐 ${chain.name} Token</strong><br/>
-        🚨 Honeypot: ${data.is_honeypot === "1" ? "Yes 🚨" : "No ✅"}<br/>
-        💸 Buy/Sell Tax: ${data.buy_tax}% / ${data.sell_tax}%<br/>
+        🧨 Honeypot: ${data.is_honeypot === "1" ? "Yes 🚨" : "No ✅"}<br/>
+        💸 Tax: ${data.buy_tax}% buy / ${data.sell_tax}% sell<br/>
         🔐 Owner: ${data.owner_address}<br/>
         👨‍💻 Creator: ${data.creator_address}<br/>
-        🚫 Blacklist: ${data.can_blacklist === "1" ? "Yes ❌" : "No ✅"}<br/>
-        🔁 Mintable: ${data.can_mint === "1" ? "Yes ❌" : "No ✅"}<br/>
-        🧩 Verified: ${data.is_open_source === "1" ? "Yes ✅" : "No ❌"}
+        ❌ Blacklist: ${data.can_blacklist === "1" ? "Yes" : "No"}<br/>
+        🔁 Mintable: ${data.can_mint === "1" ? "Yes" : "No"}<br/>
+        ✅ Verified: ${data.is_open_source === "1" ? "Yes" : "No"}
       `;
       break;
     } catch (e) {
-      console.warn(`Error on ${chain.name}:`, e);
+      console.warn(`Fehler auf ${chain.name}:`, e);
     }
   }
 
   if (!found) {
-    box.textContent = "❌ Token not found on EVM chains.";
+    box.textContent = "❌ Token nicht gefunden auf EVM-Chains.";
   }
 }
