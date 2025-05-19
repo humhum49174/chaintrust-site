@@ -1,5 +1,3 @@
-const proxyBaseURL = "https://chaintrust-solproxy.onrender.com";
-
 async function scanToken() {
   const token = document.getElementById("contractInput").value.trim();
   const box = document.getElementById("resultBox");
@@ -12,30 +10,29 @@ async function scanToken() {
     return;
   }
 
+  const url = `https://api.gopluslabs.io/api/v1/token_security/1?contract_addresses=${token}`; // Ethereum (ChainID: 1)
+  
   try {
-    const res = await fetch(`${proxyBaseURL}/scan/${token}`);
+    const res = await fetch(url);
     if (!res.ok) throw new Error("API error " + res.status);
-    const data = await res.json();
-
-    // Beispiel-Datenstruktur aus rugcheck
-    const name = data.name || "Unknown";
-    const chain = data.chain || "Auto Detected";
-    const honeypot = data.honeypotResult?.isHoneypot ? "Yes 🚫" : "No ✅";
-    const rugRisk = data.rugRisk || "Unknown";
-    const renounced = data.owner?.isRenounced ? "Yes ✅" : "No ❌";
-    const verified = data.verified ? "Yes ✅" : "No ❌";
-    const liquidity = data.liquidity?.value || "N/A";
+    const result = await res.json();
+    const data = result.result[token.toLowerCase()];
+    
+    if (!data) {
+      box.innerHTML = "❌ Token not found or invalid.";
+      return;
+    }
 
     box.innerHTML = `
-      <div><strong>📛 Token Name:</strong> ${name}</div>
-      <div><strong>🔗 Chain:</strong> ${chain}</div>
-      <div><strong>🚫 Honeypot:</strong> ${honeypot}</div>
-      <div><strong>💥 Rug Risk:</strong> ${rugRisk}</div>
-      <div><strong>🔐 Owner Renounced:</strong> ${renounced}</div>
-      <div><strong>✅ Verified:</strong> ${verified}</div>
-      <div><strong>💧 Liquidity:</strong> ${liquidity}</div>
+      <div><strong>🚫 Honeypot:</strong> ${data.is_honeypot === "1" ? "Yes 🚨" : "No ✅"}</div>
+      <div><strong>💥 Slippage Modifiable:</strong> ${data.is_slippage_modifiable === "1" ? "Yes ❗" : "No ✅"}</div>
+      <div><strong>🔐 Owner Address:</strong> ${data.owner_address}</div>
+      <div><strong>👨‍💻 Creator:</strong> ${data.creator_address}</div>
+      <div><strong>💱 Transfer Fee:</strong> ${data.sell_tax}% Sell / ${data.buy_tax}% Buy</div>
+      <div><strong>🧊 Can Freeze:</strong> ${data.can_take_back_ownership === "1" ? "Yes 🚫" : "No ✅"}</div>
+      <div><strong>🧬 Verified:</strong> ${data.is_open_source === "1" ? "Yes ✅" : "No ❌"}</div>
     `;
   } catch (e) {
-    box.innerHTML = "❌ Error: " + e.message;
+    box.innerHTML = `❌ Error: ${e.message}`;
   }
 }
