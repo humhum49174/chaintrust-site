@@ -10,8 +10,14 @@ const SOLSNIFFER_API_KEY = "ttgqm520se5mmzg2d8e2ydljv2yu3l";
 async function scanToken() {
   const token = document.getElementById("contractInput").value.trim();
   const box = document.getElementById("resultBox");
-  box.innerHTML = "🔄 Scanning...";
+
   box.style.display = "block";
+  box.textContent = "🔄 Scanning...";
+
+  if (!token) {
+    box.textContent = "❗ Please enter a contract address.";
+    return;
+  }
 
   const isSolana = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(token);
 
@@ -20,20 +26,20 @@ async function scanToken() {
       const res = await fetch(`https://api.solsniffer.com/v1/token/${token}`, {
         headers: { "x-api-key": SOLSNIFFER_API_KEY }
       });
-      if (!res.ok) throw new Error("Not found");
+      if (!res.ok) throw new Error("Token not found on Solana");
       const data = await res.json();
 
       box.innerHTML = `
-        <h3>🌐 Solana Token</h3>
-        <p><strong>Name:</strong> ${data.token_name}</p>
-        <p><strong>Sniff Score:</strong> ${data.snifscore}</p>
-        <p><strong>Liquidity:</strong> $${data.liquidity_usd}</p>
-        <p><strong>Top Holder %:</strong> ${data.top_holder_percent}%</p>
-        <p><strong>Honeypot:</strong> ${data.honeypot ? "Yes 🚨" : "No ✅"}</p>
+        <strong>🌐 Solana Token</strong><br/>
+        🧬 Name: ${data.token_name}<br/>
+        💧 Liquidity: $${data.liquidity_usd}<br/>
+        🧠 Sniff Score: ${data.snifscore}<br/>
+        🧍 Top Holder: ${data.top_holder_percent}%<br/>
+        🧨 Honeypot: ${data.honeypot ? "Yes 🚨" : "No ✅"}
       `;
       return;
-    } catch (err) {
-      box.innerHTML = `❌ Solana-Scan fehlgeschlagen: ${err.message}`;
+    } catch (e) {
+      box.textContent = "❌ Error: " + e.message;
       return;
     }
   }
@@ -48,23 +54,22 @@ async function scanToken() {
 
       found = true;
       box.innerHTML = `
-        <h3>🌐 ${chain.name} Token</h3>
-        <p><strong>Honeypot:</strong> ${data.is_honeypot === "1" ? "Yes 🚨" : "No ✅"}</p>
-        <p><strong>Buy Tax:</strong> ${data.buy_tax}%</p>
-        <p><strong>Sell Tax:</strong> ${data.sell_tax}%</p>
-        <p><strong>Owner:</strong> ${data.owner_address}</p>
-        <p><strong>Creator:</strong> ${data.creator_address}</p>
-        <p><strong>Can Blacklist:</strong> ${data.can_blacklist === "1" ? "Yes ❌" : "No ✅"}</p>
-        <p><strong>Can Mint:</strong> ${data.can_mint === "1" ? "Yes ❌" : "No ✅"}</p>
-        <p><strong>Open Source:</strong> ${data.is_open_source === "1" ? "Yes ✅" : "No ❌"}</p>
+        <strong>🌐 ${chain.name} Token</strong><br/>
+        🚨 Honeypot: ${data.is_honeypot === "1" ? "Yes 🚨" : "No ✅"}<br/>
+        💸 Buy/Sell Tax: ${data.buy_tax}% / ${data.sell_tax}%<br/>
+        🔐 Owner: ${data.owner_address}<br/>
+        👨‍💻 Creator: ${data.creator_address}<br/>
+        🚫 Blacklist: ${data.can_blacklist === "1" ? "Yes ❌" : "No ✅"}<br/>
+        🔁 Mintable: ${data.can_mint === "1" ? "Yes ❌" : "No ✅"}<br/>
+        🧩 Verified: ${data.is_open_source === "1" ? "Yes ✅" : "No ❌"}
       `;
       break;
-    } catch (err) {
-      console.warn(`Fehler bei ${chain.name}:`, err);
+    } catch (e) {
+      console.warn(`Error on ${chain.name}:`, e);
     }
   }
 
   if (!found) {
-    box.innerHTML = "❌ Token auf EVM-Chains nicht gefunden.";
+    box.textContent = "❌ Token not found on EVM chains.";
   }
 }
