@@ -17,6 +17,33 @@ async function scanToken() {
     return;
   }
 
+  // Check if it's a Solana address (base58, 32-44 chars)
+  const solanaRegex = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+  if (solanaRegex.test(token)) {
+    try {
+      const res = await fetch(`https://api.rugcheck.xyz/v1/tokens/${token}/report`);
+      if (!res.ok) throw new Error("Solana token not found");
+      const data = await res.json();
+
+      const honeypot = data.honeypotResult?.isHoneypot ? "Yes 🚨" : "No ✅";
+      const rugscore = data.rugScore ?? "N/A";
+      const renounced = data.owner?.isRenounced ? "Yes ✅" : "No ❌";
+
+      box.innerHTML = `
+        <div><strong>🌐 Chain:</strong> Solana</div>
+        <div><strong>🚫 Honeypot:</strong> ${honeypot}</div>
+        <div><strong>📉 RugScore:</strong> ${rugscore} / 100</div>
+        <div><strong>🔐 Owner Renounced:</strong> ${renounced}</div>
+        <div><strong>🧠 AI Risk:</strong> ${data.riskAssessment ?? "N/A"}</div>
+      `;
+      return;
+    } catch (e) {
+      box.innerHTML = `❌ Solana Scan Failed: ${e.message}`;
+      return;
+    }
+  }
+
+  // Other EVM chains via GoPlus
   let found = false;
 
   for (const chain of chains) {
@@ -35,18 +62,4 @@ async function scanToken() {
         <div><strong>🚫 Honeypot:</strong> ${data.is_honeypot === "1" ? "Yes 🚨" : "No ✅"}</div>
         <div><strong>💱 Transfer Fee:</strong> ${data.sell_tax}% Sell / ${data.buy_tax}% Buy</div>
         <div><strong>🎛️ Slippage Modifiable:</strong> ${data.is_slippage_modifiable === "1" ? "Yes ❗" : "No ✅"}</div>
-        <div><strong>🔐 Owner:</strong> ${data.owner_address}</div>
-        <div><strong>👨‍💻 Creator:</strong> ${data.creator_address}</div>
-        <div><strong>🔓 Ownership Renounced:</strong> ${data.can_take_back_ownership === "1" ? "No ❌" : "Yes ✅"}</div>
-        <div><strong>✅ Verified Contract:</strong> ${data.is_open_source === "1" ? "Yes ✅" : "No ❌"}</div>
-      `;
-      break;
-    } catch (e) {
-      console.warn(`Error on chain ${chain.name}:`, e);
-    }
-  }
-
-  if (!found) {
-    box.innerHTML = "❌ Token not found on supported chains.";
-  }
-}
+        <div><
