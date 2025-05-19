@@ -61,16 +61,17 @@ body {
 
 .logo {
   width: 160px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   filter: drop-shadow(0 0 10px #00ffff);
 }
 
-/* 👇 Social Buttons */
+/* Social Buttons */
 .social-links {
   display: flex;
   justify-content: center;
-  gap: 18px;
-  margin-bottom: 16px;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
 }
 
@@ -80,15 +81,10 @@ body {
 }
 
 .social-btn img {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   transition: transform 0.2s ease, filter 0.3s ease;
   filter: drop-shadow(0 0 4px #00ffff);
-}
-
-.discord-icon {
-  width: 32px;
-  height: 32px;
 }
 
 .social-btn:hover img {
@@ -205,17 +201,16 @@ body::after {
   transform: scale(1.2);
 }
 
-/* 📱 Mobile Optimierung */
+/* Mobile Optimierung */
 @media (max-width: 480px) {
   .social-links {
-    gap: 12px;
-    margin-bottom: 12px;
+    gap: 14px;
+    margin-bottom: 16px;
   }
 
-  .social-btn img,
-  .discord-icon {
-    width: 28px !important;
-    height: 28px !important;
+  .social-btn img {
+    width: 26px;
+    height: 26px;
   }
 
   .clean-button {
@@ -226,5 +221,9 @@ body::after {
   input {
     font-size: 14px;
     padding: 12px;
+  }
+
+  .logo {
+    width: 140px;
   }
 }
