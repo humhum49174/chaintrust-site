@@ -35,6 +35,13 @@
     <p>Smart Contract Risk Scanner</p>
 
     <input type="text" id="contractInput" placeholder="Paste Token Contract Address" />
+    <select id="chainSelect">
+      <option value="1">Ethereum</option>
+      <option value="56">BNB Smart Chain</option>
+      <option value="137">Polygon</option>
+      <option value="42161">Arbitrum</option>
+      <option value="8453">Base</option>
+    </select>
 
     <div class="button-wrap">
       <a class="clean-button" onclick="scanToken()">Scan Token</a>
@@ -45,27 +52,31 @@
   </div>
 
   <script>
-    const proxyBaseURL = "https://chaintrust-solproxy.onrender.com";
-
     async function scanToken() {
-      const token = document.getElementById("contractInput").value.trim();
-      const box = document.getElementById("resultBox");
-      if (!token) {
-        box.textContent = "Please enter a contract address.";
-        box.style.display = "block";
+      const address = document.getElementById("contractInput").value.trim();
+      const chainId = document.getElementById("chainSelect").value;
+      const resultBox = document.getElementById("resultBox");
+
+      if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
+        resultBox.textContent = "❌ Please enter a valid token address.";
         return;
       }
 
-      box.textContent = "Loading...";
-      box.style.display = "block";
+      resultBox.textContent = "🔍 Scanning...";
 
       try {
-        const res = await fetch(`${proxyBaseURL}/scan/${token}`);
-        if (!res.ok) throw new Error(res.status);
+        const url = `https://api.gopluslabs.io/api/v1/token_security/${chainId}?contract_addresses=${address}`;
+        const res = await fetch(url);
         const data = await res.json();
-        box.textContent = JSON.stringify(data, null, 2);
+
+        const tokenInfo = data.result[address.toLowerCase()];
+        if (!tokenInfo) {
+          resultBox.textContent = "❌ Token data not found.";
+        } else {
+          resultBox.textContent = JSON.stringify(tokenInfo, null, 2);
+        }
       } catch (e) {
-        box.textContent = "❌ Error: " + e.message;
+        resultBox.textContent = "❌ Error fetching data: " + e.message;
       }
     }
   </script>
