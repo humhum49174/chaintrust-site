@@ -17,7 +17,12 @@ async function scanToken() {
     const res = await fetch(`${proxyBaseURL}/scan/${token}`);
     if (!res.ok) throw new Error("API error " + res.status);
     const data = await res.json();
-    box.textContent = JSON.stringify(data, null, 2);
+
+    if (!data || Object.keys(data).length === 0) {
+      box.textContent = "❌ No data returned for this token.";
+    } else {
+      box.textContent = `✅ Token Info:\n\n` + JSON.stringify(data, null, 2);
+    }
   } catch (e) {
     box.textContent = "❌ Error: " + e.message;
   }
