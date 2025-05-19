@@ -19,16 +19,28 @@
 
   <div class="container">
     <img src="logo.png" alt="ChainTrust Logo" class="logo" />
-    <p class="tagline">🔍 AI-Enhanced Risk Detection. No Mercy for Rugs.</p>
+
+    <!-- 👇 Social Buttons -->
+    <div class="social-links">
+      <a href="https://x.com/TrustChainAI" target="_blank" class="social-btn" aria-label="Twitter">
+        <img src="icons/twitter.svg" alt="Twitter">
+      </a>
+      <a href="https://t.me/TrustChainAI" target="_blank" class="social-btn" aria-label="Telegram">
+        <img src="icons/telegram.svg" alt="Telegram">
+      </a>
+      <a href="https://discord.gg/TrustChainAI" target="_blank" class="social-btn" aria-label="Discord">
+        <img src="icons/discord.svg" alt="Discord">
+      </a>
+    </div>
+
     <h1>ChainTrust</h1>
     <p>Smart Contract Risk Scanner</p>
 
     <input type="text" id="contractInput" placeholder="Paste Token Contract Address" />
 
-   <div class="button-wrap">
-  <a class="clean-button" onclick="scanToken()">Scan Token</a>
-</div>
-
+    <div class="button-wrap">
+      <a class="clean-button" onclick="scanToken()">Scan Token</a>
+    </div>
 
     <pre id="resultBox"></pre>
     <footer>🔒 Powered by ChainTrust Security Engine | ChainTrust 2025</footer>
