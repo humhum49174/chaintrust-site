@@ -1,8 +1,8 @@
 const chains = [
-  { id: 1, name: "Ethereum", icon: "icons/eth.svg" },
-  { id: 56, name: "BNB Chain", icon: "icons/bnb.svg" },
-  { id: 137, name: "Polygon", icon: "icons/polygon.svg" },
-  { id: 42161, name: "Arbitrum", icon: "icons/arbitrum.svg" }
+  { id: 1, name: "ethereum", icon: "icons/eth.svg" },
+  { id: 56, name: "binance", icon: "icons/bnb.svg" },
+  { id: 137, name: "polygon", icon: "icons/polygon.svg" },
+  { id: 42161, name: "arbitrum", icon: "icons/arbitrum.svg" }
 ];
 
 function tag(value, successLabel = "Yes", failLabel = "No") {
@@ -67,11 +67,13 @@ async function scanToken() {
 
       found = true;
 
+      const logoURL = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/${chain.name}/assets/${token}/logo.png`;
+
       box.innerHTML = `
         <div class="result-card evm">
           <div class="result-header">
-            <img src="${chain.icon}" class="chain-icon" />
-            <h3>${chain.name} Token</h3>
+            <img src="${logoURL}" class="chain-icon" onerror="this.src='${chain.icon}'" />
+            <h3>${chain.name.charAt(0).toUpperCase() + chain.name.slice(1)} Token</h3>
           </div>
           <div class="result-body">
             <div class="result-row"><span>Honeypot:</span>${tag(data.is_honeypot === "0", "No", "Yes")}</div>
@@ -86,7 +88,7 @@ async function scanToken() {
       `;
       break;
     } catch (e) {
-      console.warn(`Error on ${chain.name}:`, e);
+      console.warn(`⚠️ Error on ${chain.name}:`, e);
     }
   }
 
