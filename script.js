@@ -14,7 +14,6 @@ function tag(value, successLabel = "Yes", failLabel = "No") {
 async function scanToken() {
   const token = document.getElementById("contractInput").value.trim();
   const box = document.getElementById("resultBox");
-
   box.style.display = "block";
   box.innerHTML = "🔄 Scanning...";
 
@@ -23,46 +22,34 @@ async function scanToken() {
     return;
   }
 
-  const isSolana = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(token);
-
-  if (isSolana) {
-    try {
-      const res = await fetch(`https://api.rugcheck.xyz/v1/tokens/${token}/report`);
-      if (!res.ok) throw new Error("Token not found on Solana");
-      const data = await res.json();
-
-      const honeypot = tag(data.honeypotResult?.isHoneypot === false, "No", "Yes");
-      const rugscore = data.rugScore ?? "N/A";
-      const renounced = tag(data.owner?.isRenounced);
-      const liquidity = data.liquidity?.sol ?? "N/A";
-
-      box.innerHTML = `
-        <div class="result-card solana">
-          <div class="result-header">
-            <img src="icons/solana.svg" class="chain-icon" />
-            <h3>Solana Token</h3>
-          </div>
-          <div class="result-body">
-            <div class="result-row"><span>RugScore:</span><span>${rugscore} / 100</span></div>
-            <div class="result-row"><span>Honeypot:</span>${honeypot}</div>
-            <div class="result-row"><span>Renounced:</span>${renounced}</div>
-            <div class="result-row"><span>Liquidity:</span><span>${liquidity} SOL</span></div>
-          </div>
-        </div>
-      `;
-      return;
-    } catch (e) {
-      box.innerHTML = `<div class="result-card"><strong>❌ Solana-Scan fehlgeschlagen:</strong> ${e.message}</div>`;
-      return;
-    }
-  }
-
   let found = false;
+
   for (const chain of chains) {
     try {
-      const res = await fetch(`https://api.gopluslabs.io/api/v1/token_security/${chain.id}?contract_addresses=${token}`);
-      const result = await res.json();
-      const data = result.result[token.toLowerCase()];
+      const baseURL = `https://api.gopluslabs.io/api/v1`;
+      const tokenLC = token.toLowerCase();
+
+      // Alle Sicherheitsendpunkte abfragen
+      const [
+        tokenSec,
+        contractSec,
+        approvalSec,
+        honeypot,
+        phishing
+      ] = await Promise.all([
+        fetch(`${baseURL}/token_security/${chain.id}?contract_addresses=${token}`).then(r => r.json()),
+        fetch(`${baseURL}/contract_security/${chain.id}?contract_addresses=${token}`).then(r => r.json()),
+        fetch(`${baseURL}/approval_security/${chain.id}?contract_addresses=${token}`).then(r => r.json()),
+        fetch(`${baseURL}/honeypot_detection/${chain.id}?contract_addresses=${token}`).then(r => r.json()),
+        fetch(`${baseURL}/phishing_site_checker?url=${token}`).then(r => r.json())
+      ]);
+
+      const data = tokenSec.result?.[tokenLC];
+      const contractData = contractSec.result?.[tokenLC];
+      const approvalData = approvalSec.result?.[tokenLC];
+      const honeypotData = honeypot.result?.[tokenLC];
+      const phishingData = phishing.result?.[tokenLC];
+
       if (!data) continue;
 
       found = true;
@@ -76,23 +63,30 @@ async function scanToken() {
             <h3>${chain.name.charAt(0).toUpperCase() + chain.name.slice(1)} Token</h3>
           </div>
           <div class="result-body">
-            <div class="result-row"><span>Honeypot:</span>${tag(data.is_honeypot === "0", "No", "Yes")}</div>
+            <div class="result-row"><span>Honeypot:</span>${tag(honeypotData?.is_honeypot === "0", "No", "Yes")}</div>
             <div class="result-row"><span>Buy/Sell Tax:</span><span>${data.buy_tax}% / ${data.sell_tax}%</span></div>
             <div class="result-row"><span>Owner:</span><span>${data.owner_address}</span></div>
-            <div class="result-row"><span>Creator:</span><span>${data.creator_address}</span></div>
             <div class="result-row"><span>Can Blacklist:</span>${tag(data.can_blacklist)}</div>
             <div class="result-row"><span>Can Mint:</span>${tag(data.can_mint)}</div>
             <div class="result-row"><span>Open Source:</span>${tag(data.is_open_source)}</div>
+            <div class="result-row"><span>Proxy Contract:</span>${tag(contractData?.is_proxy)}</div>
+            <div class="result-row"><span>Upgradeable:</span>${tag(contractData?.is_upgradable)}</div>
+            <div class="result-row"><span>Hidden Owner:</span>${tag(contractData?.hidden_owner)}</div>
+            <div class="result-row"><span>Self Destruct:</span>${tag(contractData?.selfdestruct)}</div>
+            <div class="result-row"><span>External Calls:</span>${tag(contractData?.external_call)}</div>
+            <div class="result-row"><span>Phishing Detected:</span>${tag(phishingData?.risk, "Yes", "No")}</div>
+            <div class="result-row"><span>Token Approval Risk:</span>${tag(approvalData?.is_approval_check_needed)}</div>
           </div>
         </div>
       `;
       break;
+
     } catch (e) {
-      console.warn(`⚠️ Error on ${chain.name}:`, e);
+      console.warn(`Error on ${chain.name}:`, e);
     }
   }
 
   if (!found) {
-    box.innerHTML = `<div class="result-card"><strong>❌ Token not found on supported EVM chains.</strong></div>`;
+    box.innerHTML = `<div class="result-card"><strong>❌ Token not found or no security data available.</strong></div>`;
   }
 }
