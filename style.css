@@ -5,8 +5,8 @@ body {
   background: #000;
   color: #ffffff;
   font-family: 'Inter', sans-serif;
-  overflow: hidden;
-  height: 100vh;
+  overflow-y: auto;
+  min-height: 100vh;
 }
 
 .stars {
@@ -63,11 +63,9 @@ body::after {
   box-shadow: 0 0 20px #00ffff;
   max-width: 480px;
   width: 90%;
-  margin: auto;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  margin: 60px auto;
   z-index: 1;
+  position: relative;
 }
 
 .container::before {
